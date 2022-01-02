@@ -1,0 +1,70 @@
+<mvc:View
+	controllerName="src.controller.main"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:tnt="sap.tnt"
+	xmlns:core="sap.ui.core"
+	height="100%">
+	<tnt:ToolPage id="toolPage">
+		<tnt:header>
+			<tnt:ToolHeader>
+				<Button
+					id="sideNavigationToggleButton"
+					icon="sap-icon://menu2"
+					type="Transparent"
+					press=".onSideNavButtonPress">
+					<layoutData>
+						<OverflowToolbarLayoutData priority="NeverOverflow" />
+					</layoutData>
+				</Button>
+				<ToolbarSpacer width="20px" />
+				<Button text="Help" type="Transparent" press=".onHelp">
+					<layoutData>
+						<OverflowToolbarLayoutData priority="Low" />
+					</layoutData>
+				</Button>
+				<tnt:ToolHeaderUtilitySeparator />
+				<ToolbarSpacer>
+					<layoutData>
+						<OverflowToolbarLayoutData priority="NeverOverflow" minWidth="20px" />
+					</layoutData>
+				</ToolbarSpacer>
+				<Button text="{user>/fname} {user>/lname}" type="Transparent" press=".handleUserNamePress">
+					<layoutData>
+						<OverflowToolbarLayoutData priority="NeverOverflow" />
+					</layoutData>
+				</Button>
+			</tnt:ToolHeader>
+		</tnt:header>
+		<tnt:sideContent>
+			<tnt:SideNavigation
+				expanded="true"
+				selectedKey="{pagesTree>/selectedKey}"
+				itemSelect=".onItemSelect">
+				<tnt:NavigationList items="{pagesTree>/navigation}">
+					<tnt:NavigationListItem
+						text="{pagesTree>title}"
+						icon="{pagesTree>icon}"
+						enabled="{pagesTree>enabled}"
+						expanded="{pagesTree>expanded}"
+						items="{path: 'pagesTree>items', templateShareable: false}"
+						key="{pagesTree>key}">
+						<tnt:NavigationListItem
+							text="{pagesTree>title}"
+							key="{pagesTree>key}"
+							enabled="{pagesTree>enabled}" />
+					</tnt:NavigationListItem>
+				</tnt:NavigationList>
+				<!-- <tnt:fixedItem>
+					<tnt:NavigationList items="{pagesTree>/fixedNavigation}">
+						<tnt:NavigationListItem text="{pagesTree>title}" icon="{pagesTree>icon}"/>
+					</tnt:NavigationList>
+				</tnt:fixedItem> -->
+			</tnt:SideNavigation>
+		</tnt:sideContent>
+		<tnt:mainContents>
+			<NavContainer id="pageContainer">
+			</NavContainer>
+		</tnt:mainContents>
+	</tnt:ToolPage>
+</mvc:View>

@@ -1,0 +1,87 @@
+<mvc:View
+	controllerName="src.controller.new_customer"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core">
+	<Page title="New Customer" enableScrolling="true"
+	class="sapUiResponsivePadding--header sapUiResponsivePadding--footer">
+		<content>
+				<!-- title="Address" -->
+			<f:SimpleForm id="simple_form"
+				editable="true"
+				layout="ResponsiveGridLayout"
+				labelSpanXL="4"
+				labelSpanL="4"
+				labelSpanM="12"
+				labelSpanS="12"
+				adjustLabelSpan="false"
+				emptySpanXL="0"
+				emptySpanL="0"
+				emptySpanM="0"
+				emptySpanS="0"
+				columnsXL="2"
+				columnsL="2"
+				columnsM="1"
+				singleContainerFullSize="false" >
+				<f:content>
+					<core:Title text="Name and Company"/>
+					<Label text="full name"/>
+					<Input value="{SupplierName}"/>
+					<Label text="company name" />
+					<Input value="{SupplierName}"/>
+					<Label text="VAT No."/>
+					<Input value="{}"/>
+					<Label text="is Wholesaler?"/>
+					<RadioButtonGroup id="RadioGroup" selectedIndex="1" select="onTimeUnitSelected">
+						<buttons>
+							<RadioButton text="yes"/>
+							<RadioButton text="no"/>
+						</buttons>
+					</RadioButtonGroup>
+					<core:Title text="Adress"/>
+					<Label text="Street/No."/>
+					<Input value="{Street}">
+					</Input>
+					<Input value="{HouseNumber}">
+						<layoutData>
+							<l:GridData span="XL2 L3 M4 S4" />
+						</layoutData>
+					</Input>
+					<Label text="ZIP Code/City" />
+					<Input value="{ZIPCode}">
+						<layoutData>
+							<l:GridData span="XL2 L3 M4 S4" />
+						</layoutData>
+					</Input>
+					<Input value="{City}"/>
+					<Label text="Country"/>
+					<Select id="country" selectedKey="{Country}">
+						<items>
+							<core:Item text="England" key="England"/>
+							<core:Item text="Germany" key="Germany"/>
+							<core:Item text="USA" key="USA"/>
+						</items>
+					</Select>
+					<core:Title text="Contact Information"/>
+					<Label text="Tel"/>
+					<Input value="{Url}" type="Url"/>
+					<Label text="email"/>
+					<Input/>
+					<Label text="Web"/>
+					<Input value="{Url}" type="Url"/>
+				</f:content>
+			</f:SimpleForm>
+		</content>
+		<footer>
+			<OverflowToolbar>
+				<content>
+					<ToolbarSpacer/>
+					<Button text="save" icon="sap-icon://save" type="Accept" enabled="false" press="onSave"/>
+					<Button text="cancel"  icon="sap-icon://decline" type="Reject" press="onCancel"/>
+				</content>
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</mvc:View>

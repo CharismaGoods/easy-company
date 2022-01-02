@@ -1,0 +1,179 @@
+{
+	"_version": "1.8.0",
+	"sap.app": {
+		"_version": "1.3.0",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"applicationVersion": {
+			"version": "1.2.2"
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "sap-icon://detail-view",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		}
+	},
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "src.view.main",
+			"type": "XML",
+			"async": true,
+			"id": "toolPage"
+		},
+		"autoPrefixId": true,
+		"dependencies": {
+			"minUI5Version": "1.50.0",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "src.i18n.i18n"
+				}
+			},
+			"pagesTree": {
+				"type": "sap.ui.model.json.JSONModel",
+				"uri": "./model/pages_tree.json"
+			}
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "src.view",
+				"controlId": "pageContainer",
+				"controlAggregation": "pages",
+				"transition": "slide",
+				"async": true,
+				"bypassed": {
+					"target": "notFound"
+				}
+			 },
+			"routes": [
+				{
+					"pattern": "notFound",
+					"name": "notFound",
+					"target": "notFound"
+				},
+				{
+					"pattern": "",
+					"name": "app",
+					"target": ["customers"]
+				},
+				{
+					"pattern": "customers",
+					"name": "customers",
+					"target": ["customers"]
+				},
+				{
+					"pattern": "new_customer",
+					"name": "new_customer",
+					"target": ["new_customer"]
+				},
+				{
+					"pattern": "growth?week={sWeek}",
+					"name": "growth+",
+					"target": ["WeeklyGrowth"]
+				},
+				{
+					"pattern": "pivot",
+					"name": "pivot",
+					"target": ["pivot"]
+				},
+				{
+					"pattern": "pivot?week={sWeek}",
+					"name": "pivot+",
+					"target": ["pivot"]
+				},
+				{
+					"pattern": "tms_changes",
+					"name": "tms_changes",
+					"target": ["TMS_changes"]
+				},
+				{
+					"pattern": "tms_changes?week={sWeek}",
+					"name": "tms_changes+",
+					"target": ["TMS_changes"]
+				},
+				{
+					"pattern": "statisticsTable",
+					"name": "statisticsTable",
+					"target": ["statisticsTable"]
+				},
+				{
+					"pattern": "statisticsChart",
+					"name": "statisticsChart",
+					"target": ["statisticsChart"]
+				},
+				{
+					"pattern": "statisticsChart?dataset={dataset}&timeUnit={timeUnit}&lobs={lobs}&dateBegin={date}",
+					"name": "statisticsChartParameter",
+					"target": ["statisticsChart"]
+				},
+				{
+					"pattern": "ws",
+					"name": "ws",
+					"target": ["ws"]
+				}
+			],
+			"targets": {
+				"notFound": {
+					"viewName": "NotFound",
+					"transition": "show"
+				},
+				"main": {
+					"viewName": "main",
+					"viewId": "toolPage"
+				},
+				"customers": {
+					"viewName": "customers",
+					"viewId": "customers"
+				},
+				"new_customer": {
+					"viewName": "new_customer"
+				},
+				"pivot": {
+					"viewName": "Pivot",
+					"viewId": "pivot"
+				},
+				"TMS_changes": {
+					"viewName": "TMS_changes",
+					"viewId": "TMS_changes"
+				},
+				"statisticsTable": {
+					"viewName": "StatisticsTable",
+					"viewId": "statisticsTable"
+				},
+				"statisticsChart": {
+					"viewName": "RepChart",
+					"viewId": "statisticsChart"
+				},
+				"ws": {
+					"viewName": "WS",
+					"viewId": "ws"
+				}
+			}
+		}
+	}
+}

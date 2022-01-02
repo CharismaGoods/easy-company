@@ -1,0 +1,27 @@
+# Application Cache Buster
+# https://sapui5.hana.ondemand.com/#/topic/ff7aceda0bd24039beb9bca8e882825d
+#
+# Create file sap-ui-cachebuster-info.json and add a unique identifier per file.
+# The identifier represents the version of that file.
+#
+# UI5 then inserts that identifier into the path.
+# As long as this identifier does not change, the webserver is asked to open the file
+# from that path hence it will deliver the cached version.
+# Once the identifier changes, the path will change and the webserver will deliver the file
+# from a 'new' path, hence reading the file from disk instead of cache.
+# The trick is to rewrite the path (or in other words the URL) to ignore the inserted
+# identifier, which is done with this .htaccess RewriteRule.
+
+RewriteEngine on
+
+<Files "sap-ui-cachebuster-info.json">
+  # Generate fingerprint index on-the-fly if it does not exist.
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^ /web/html/deploy/cgi-bin/ui5_cachebuster.pl [E=REQUEST_FILENAME:%{REQUEST_FILENAME},END]
+
+  # This will only affect static files, the script also needs to send this header.
+  Header set Cache-Control no-cache
+</Files>
+
+RewriteRule ^~.+~/(.+) $1 [E=longexpiry]
+Header always set Cache-Control "max-age=31536000, public" env=REDIRECT_longexpiry

@@ -1,0 +1,90 @@
+<mvc:View
+	controllerName="src.controller.customers"
+	xmlns="sap.m"
+	xmlns:t="sap.ui.table"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core">
+	<Page title="Customers"
+	class="sapUiContentPadding sapUiResponsivePadding--header sapUiResponsivePadding--subHeader sapUiResponsivePadding--content sapUiResponsivePadding--footer">
+		<headerContent>
+			<Button icon="sap-icon://add" tooltip="add new customer" press="onNewCustomerClick"/>
+		</headerContent>
+		<content>
+			<t:Table rows="{customers>/}"
+			alternateRowColors="true"
+			enableCellFilter="true"
+			showColumnVisibilityMenu="true"
+			visibleRowCountMode="Auto"
+			selectionMode="None">
+				<!-- <t:extension>
+					<OverflowToolbar style="Clear">
+						<Title text="Products"/>
+					</OverflowToolbar>
+				</t:extension> -->
+				<t:columns>
+					<t:Column filterProperty="full_name">
+						<Label text="Name"/>
+						<t:template>
+							<Label text="{customers>full_name}" wrapping="false"/>
+						</t:template>
+					</t:Column>
+					<t:Column>
+						<Label text="Company"/>
+						<t:template>
+							<Text text="{customers>company_name}"/>
+						</t:template>
+					</t:Column>
+					<t:Column visible="false">
+						<Label text="VAT No."/>
+						<t:template>
+							<Text text="{customers>vat_no}"/>
+						</t:template>
+					</t:Column>
+					<t:Column width="6rem">
+						<Label text="Wholesaler" />
+						<t:template>
+							<Text text="{customers>is_wholesaler}" />
+						</t:template>
+					</t:Column>
+					<t:Column width="11rem">
+						<Label text="Adress"/>
+						<t:template>
+							<Text text="{customers>street}, {customers>zip} {customers>city} {customers>country}" wrapping="true"/>
+						</t:template>
+					</t:Column>
+					<t:Column width="9rem">
+						<Label text="Tel" />
+						<t:template>
+							<Text text="{customers>mobile}" />
+						</t:template>
+					</t:Column>
+					<t:Column>
+						<Label text="Email" />
+						<t:template>
+							<Text text="{customers>email}" />
+						</t:template>
+					</t:Column>
+					<t:Column visible="false">
+						<Label text="Web"/>
+						<t:template>
+							<Text text="{customers>website}"/>
+						</t:template>
+					</t:Column>
+					<t:Column>
+						<Label text="Change"/>
+						<t:template>
+							<MenuButton text="actions">
+								<menu>
+									<Menu>
+										<MenuItem text="Edit" icon="sap-icon://edit" press="onEdite" />
+										<MenuItem text="Delete" icon="sap-icon://delete" press="onDelete" />
+									</Menu>
+								</menu>
+							</MenuButton>
+						</t:template>
+					</t:Column>
+				</t:columns>
+			</t:Table>
+		</content>
+	</Page>
+</mvc:View>
