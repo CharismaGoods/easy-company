@@ -5,8 +5,8 @@
 	xmlns:l="sap.ui.layout"
 	xmlns:f="sap.ui.layout.form"
 	xmlns:core="sap.ui.core">
-	<Page title="New Customer" enableScrolling="true"
-	class="sapUiResponsivePadding--header sapUiResponsivePadding--footer">
+	<Page title="New Customer" enableScrolling="false"
+	class="sapUiContentPadding sapUiResponsivePadding--header sapUiResponsivePadding--subHeader sapUiResponsivePadding--content sapUiResponsivePadding--footer">
 		<content>
 				<!-- title="Address" -->
 			<f:SimpleForm id="simple_form"
@@ -24,53 +24,100 @@
 				columnsXL="2"
 				columnsL="2"
 				columnsM="1"
-				singleContainerFullSize="false" >
+				singleContainerFullSize="false">
 				<f:content>
 					<core:Title text="Name and Company"/>
-					<Label text="full name"/>
-					<Input value="{SupplierName}"/>
-					<Label text="company name" />
-					<Input value="{SupplierName}"/>
-					<Label text="VAT No."/>
-					<Input value="{}"/>
-					<Label text="is Wholesaler?"/>
-					<RadioButtonGroup id="RadioGroup" selectedIndex="1" select="onTimeUnitSelected">
+					<Label text="Full Name" labelFor="customer_name"/>
+					<Input id="customer_name" change="onChange" value="{
+						path: 'customer>/full_name',
+						type: 'sap.ui.model.type.String',
+						constraints: {
+							minLength: 3
+						}
+					}"/>
+					<Label text="Company Name" labelFor="customer_company"/>
+					<Input id="customer_company" change="onChange" value="{
+						path: 'customer>/company_name',
+						type: 'sap.ui.model.type.String',
+						constraints: {
+							minLength: 4
+						}
+					}"/>
+					<Label text="VAT No." labelFor="customer_vat"/>
+					<Input id="customer_vat" value="{customer>/vat_no}"/>
+					<Label text="Is Wholesaler?" labelFor="RadioGroup"/>
+					<RadioButtonGroup id="RadioGroup" selectedIndex="{= ${customer>/is_wholesaler} ? 1 : 0}" select="onRadioGroupChange">
 						<buttons>
-							<RadioButton text="yes"/>
 							<RadioButton text="no"/>
+							<RadioButton text="yes"/>
 						</buttons>
 					</RadioButtonGroup>
+
 					<core:Title text="Adress"/>
 					<Label text="Street/No."/>
-					<Input value="{Street}">
+					<Input id="customer_street" value="{
+						path: 'customer>/street',
+						type: 'sap.ui.model.type.String',
+						constraints: {
+							minLength: 3
+						}
+					}"/>
+					<Input id="customer_house_no" value="{
+						path: 'customer>/house_no',
+						type: 'sap.ui.model.type.String',
+						constraints: {
+							minLength: 2
+						}
+					}">
+						<layoutData>
+							<l:GridData span="XL2 L3 M4 S4"/>
+						</layoutData>
 					</Input>
-					<Input value="{HouseNumber}">
+					<Label text="ZIP Code/City"/>
+					<Input id="customer_zip" value="{
+						path: 'customer>/zip',
+						type: 'sap.ui.model.type.String',
+						constraints: {
+							minLength: 4
+						}
+					}">
 						<layoutData>
 							<l:GridData span="XL2 L3 M4 S4" />
 						</layoutData>
 					</Input>
-					<Label text="ZIP Code/City" />
-					<Input value="{ZIPCode}">
-						<layoutData>
-							<l:GridData span="XL2 L3 M4 S4" />
-						</layoutData>
-					</Input>
-					<Input value="{City}"/>
-					<Label text="Country"/>
-					<Select id="country" selectedKey="{Country}">
+					<Input id="customer_city" value="{
+						path: 'customer>/city',
+						type: 'sap.ui.model.type.String',
+						constraints: {
+							minLength: 4
+						}
+					}"/>
+					<Label text="Country" labelFor="customer_country"/>
+					<Select id="customer_country" selectedKey="{customer>/country}">
 						<items>
 							<core:Item text="England" key="England"/>
 							<core:Item text="Germany" key="Germany"/>
 							<core:Item text="USA" key="USA"/>
 						</items>
 					</Select>
+
 					<core:Title text="Contact Information"/>
-					<Label text="Tel"/>
-					<Input value="{Url}" type="Url"/>
-					<Label text="email"/>
-					<Input/>
-					<Label text="Web"/>
-					<Input value="{Url}" type="Url"/>
+					<Label text="Tel" labelFor="customer_tel"/>
+					<Input id="customer_tel" value="{customer>/tel}" type="Tel"/>
+					<Label text="Mobile" labelFor="customer_mobile"/>
+					<Input id="customer_mobile" value="{customer>/mobile}" type="Tel"/>
+					<Label text="Email" labelFor="customer_email"/>
+					<Input id="customer_email" type="Email" value="{
+						path: 'customer>/email',
+						type: '.email'
+					}"/>
+					<Label text="Website" labelFor="customer_web"/>
+					<Input id="customer_web" type="Url" value="{
+						path: 'customer>/website',
+						type: '.url'
+					}"/>
+					<Label text="Note" labelFor="customer_notes"/>
+					<Input id="customer_note" value="{customer>/note}"/>
 				</f:content>
 			</f:SimpleForm>
 		</content>
@@ -78,7 +125,7 @@
 			<OverflowToolbar>
 				<content>
 					<ToolbarSpacer/>
-					<Button text="save" icon="sap-icon://save" type="Accept" enabled="false" press="onSave"/>
+					<Button text="save" icon="sap-icon://save" type="Accept" press="onSave"/>
 					<Button text="cancel"  icon="sap-icon://decline" type="Reject" press="onCancel"/>
 				</content>
 			</OverflowToolbar>

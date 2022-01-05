@@ -92,49 +92,14 @@
 					"target": ["new_customer"]
 				},
 				{
-					"pattern": "growth?week={sWeek}",
-					"name": "growth+",
-					"target": ["WeeklyGrowth"]
+					"pattern": "edite_customer?id={id}",
+					"name": "edite_customer",
+					"target": ["new_customer"]
 				},
 				{
-					"pattern": "pivot",
-					"name": "pivot",
-					"target": ["pivot"]
-				},
-				{
-					"pattern": "pivot?week={sWeek}",
-					"name": "pivot+",
-					"target": ["pivot"]
-				},
-				{
-					"pattern": "tms_changes",
-					"name": "tms_changes",
-					"target": ["TMS_changes"]
-				},
-				{
-					"pattern": "tms_changes?week={sWeek}",
-					"name": "tms_changes+",
-					"target": ["TMS_changes"]
-				},
-				{
-					"pattern": "statisticsTable",
-					"name": "statisticsTable",
-					"target": ["statisticsTable"]
-				},
-				{
-					"pattern": "statisticsChart",
-					"name": "statisticsChart",
-					"target": ["statisticsChart"]
-				},
-				{
-					"pattern": "statisticsChart?dataset={dataset}&timeUnit={timeUnit}&lobs={lobs}&dateBegin={date}",
-					"name": "statisticsChartParameter",
-					"target": ["statisticsChart"]
-				},
-				{
-					"pattern": "ws",
-					"name": "ws",
-					"target": ["ws"]
+					"pattern": "products",
+					"name": "products",
+					"target": ["products"]
 				}
 			],
 			"targets": {
@@ -153,25 +118,9 @@
 				"new_customer": {
 					"viewName": "new_customer"
 				},
-				"pivot": {
-					"viewName": "Pivot",
-					"viewId": "pivot"
-				},
-				"TMS_changes": {
-					"viewName": "TMS_changes",
-					"viewId": "TMS_changes"
-				},
-				"statisticsTable": {
-					"viewName": "StatisticsTable",
-					"viewId": "statisticsTable"
-				},
-				"statisticsChart": {
-					"viewName": "RepChart",
-					"viewId": "statisticsChart"
-				},
-				"ws": {
-					"viewName": "WS",
-					"viewId": "ws"
+				"products": {
+					"viewName": "products",
+					"viewId": "products"
 				}
 			}
 		}

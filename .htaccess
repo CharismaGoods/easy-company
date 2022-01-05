@@ -17,7 +17,7 @@ RewriteEngine on
 <Files "sap-ui-cachebuster-info.json">
   # Generate fingerprint index on-the-fly if it does not exist.
   RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteRule ^ /web/html/deploy/cgi-bin/ui5_cachebuster.pl [E=REQUEST_FILENAME:%{REQUEST_FILENAME},END]
+  RewriteRule ^/ui5_cachebuster.pl [E=REQUEST_FILENAME:%{REQUEST_FILENAME},END]
 
   # This will only affect static files, the script also needs to send this header.
   Header set Cache-Control no-cache

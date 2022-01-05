@@ -4,18 +4,20 @@
 	xmlns:t="sap.ui.table"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:core="sap.ui.core">
-	<Page title="Customers"
+	<Page title="Customers" enableScrolling="false"
 	class="sapUiContentPadding sapUiResponsivePadding--header sapUiResponsivePadding--subHeader sapUiResponsivePadding--content sapUiResponsivePadding--footer">
 		<headerContent>
 			<Button icon="sap-icon://add" tooltip="add new customer" press="onNewCustomerClick"/>
 		</headerContent>
 		<content>
+		<VBox fitContainer="true">
 			<t:Table rows="{customers>/}"
 			alternateRowColors="true"
 			enableCellFilter="true"
 			showColumnVisibilityMenu="true"
 			visibleRowCountMode="Auto"
 			selectionMode="None">
+				<t:layoutData><FlexItemData growFactor="1"/></t:layoutData>
 				<!-- <t:extension>
 					<OverflowToolbar style="Clear">
 						<Title text="Products"/>
@@ -49,13 +51,13 @@
 					<t:Column width="11rem">
 						<Label text="Adress"/>
 						<t:template>
-							<Text text="{customers>street}, {customers>zip} {customers>city} {customers>country}" wrapping="true"/>
+							<Text text="{customers>street} {customers>hous_no}, {customers>zip} {customers>city} {customers>country}" wrapping="true"/>
 						</t:template>
 					</t:Column>
-					<t:Column width="9rem">
+					<t:Column>
 						<Label text="Tel" />
 						<t:template>
-							<Text text="{customers>mobile}" />
+							<Text text="{= ${customers>tel} ? 'Tel: ' + ${customers>tel} : '' }{= ${customers>tel} &amp;&amp; ${customers>mobile} ? '&#13;&#10;' : '' }{= ${customers>mobile} ? 'Mobile: ' + ${customers>mobile} : '' }"/>
 						</t:template>
 					</t:Column>
 					<t:Column>
@@ -71,20 +73,33 @@
 						</t:template>
 					</t:Column>
 					<t:Column>
+						<Label text="Note"/>
+						<t:template>
+							<Text text="{customers>note}"/>
+						</t:template>
+					</t:Column>
+					<t:Column>
 						<Label text="Change"/>
 						<t:template>
-							<MenuButton text="actions">
+							<SegmentedButton selectedButton="none">
+								<items>
+									<SegmentedButtonItem icon="sap-icon://edit" press="onEdite"/>
+									<SegmentedButtonItem icon="sap-icon://delete" press="onDelete"/>
+								</items>
+							</SegmentedButton>
+							<!-- <MenuButton text="actions">
 								<menu>
 									<Menu>
-										<MenuItem text="Edit" icon="sap-icon://edit" press="onEdite" />
-										<MenuItem text="Delete" icon="sap-icon://delete" press="onDelete" />
+										<MenuItem text="Edit" icon="sap-icon://edit" press="onEdite"/>
+										<MenuItem text="Delete" icon="sap-icon://delete" press="onDelete"/>
 									</Menu>
 								</menu>
-							</MenuButton>
+							</MenuButton> -->
 						</t:template>
 					</t:Column>
 				</t:columns>
 			</t:Table>
+		</VBox>
 		</content>
 	</Page>
 </mvc:View>
